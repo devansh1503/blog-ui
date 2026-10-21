@@ -1,41 +1,29 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
-function List({objects, title = 'Explore More'}) {
+function List({ objects, title = 'The reading room' }) {
   return (
-    <div className='list-outer'>
-        <div className='list-heading'>
-            <h1>{title}</h1>
-        </div>
-        <div className='list'>
-
-            {
-                objects.map((item, index) => {
-                    return <Card key={item.id ?? index} details={item}></Card>
-                })
-            }
-        </div>
-    </div>
-  )
-}
-
-function Card({details}){
-    const [dimensions] = useState(() => ({
-        '--card-width': `${300 + Math.floor(Math.random() * 100)}px`,
-        '--card-height': `${300 + Math.floor(Math.random() * 100)}px`,
-    }))
-
-    return (
-        <Link className='card' to={`/books/${encodeURIComponent(details.id)}`} style={dimensions}>
+    <section className='list-outer' aria-labelledby='posts-title'>
+      <div className='list-heading'>
+        <div><p className='eyebrow'>A little inspiration, a new perspective</p><h2 id='posts-title'>{title}</h2></div>
+        <span className='section-note'>Stay curious. Keep reading.</span>
+      </div>
+      <div className='list'>
+        {objects.map((item, index) => (
+          <Link key={item.id ?? index} className='card' to={`/books/${encodeURIComponent(item.id)}`} style={{ '--card-index': Math.min(index, 6) }}>
             <div className='card-img'>
-                {details.imageUrl?.trim() && <img src={details.imageUrl} alt={details.title} />}
+              {item.imageUrl?.trim() ? <img loading='lazy' src={item.imageUrl} alt='' /> : <span className='cover-placeholder' aria-hidden='true'>L.</span>}
             </div>
             <div className='card-details'>
-                <h3>{details.title}</h3>
-                <p>{details.description}</p>
+              <span className='eyebrow'>From the journal</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <span className='read-link'>Discover the story <span aria-hidden='true'>↗</span></span>
             </div>
-        </Link>
-    )
+          </Link>
+        ))}
+      </div>
+    </section>
+  )
 }
 
 export default List

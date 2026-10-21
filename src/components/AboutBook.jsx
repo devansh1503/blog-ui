@@ -5,6 +5,7 @@ function AboutBook({ book }) {
         <img src={book.imageUrl} alt={book.title} />
       </div>}
       <div className='book-description'>
+        <p className='eyebrow'>A story worth settling into</p>
         <h1 id='book-title'>{book.title}</h1>
         <p>{book.description}</p>
       </div>

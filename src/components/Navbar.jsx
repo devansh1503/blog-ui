@@ -15,18 +15,15 @@ function Navbar() {
 
   return (
     <header className='navbar'>
-      <Link className='brand' to='/'>LifeIsOn</Link>
+      <Link className='brand' to='/' aria-label='LifeIsOn home'>LifeIsOn<span>.</span></Link>
       <form key={`${location.pathname}${location.search}`} className='search' onSubmit={handleSubmit} role='search'>
-        <input name='query' aria-label='Search posts' placeholder='Search Using Keywords' defaultValue={location.pathname === '/' ? params.get('query') || '' : ''} type='search' />
-        <button type='submit' aria-label='Search'>🔍</button>
+        <input name='query' aria-label='Search posts' placeholder='Find your next read…' defaultValue={location.pathname === '/' ? params.get('query') || '' : ''} type='search' />
+        <button type='submit' aria-label='Search'><svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.6' aria-hidden='true'><circle cx='10.5' cy='10.5' r='6.5' /><path d='m16 16 5 5' /></svg></button>
         <button className='search-clear' type='reset' onClick={() => navigate('/')}>Clear</button>
       </form>
       <div className='navbar-actions'>
-        <div>
-          <div>About</div>
-          <div>Translate Page</div>
-        </div>
-        <button className='theme-toggle' type='button' onClick={toggleTheme} aria-pressed={theme === 'dark'} aria-label='Dark mode'>
+        <Link className='nav-journal' to='/'>The journal</Link>
+        <button className='theme-toggle' type='button' onClick={toggleTheme} aria-pressed={theme === 'dark'} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀ Light mode' : '☾ Dark mode'}
         </button>
       </div>

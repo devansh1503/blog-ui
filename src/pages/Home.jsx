@@ -74,6 +74,17 @@ function HomePosts({ query }) {
 
   return (
     <div>
+      {!query && (
+        <section className='journal-intro'>
+          <p className='eyebrow'><span className='intro-dot' /> Stories, thoughts & everything in between</p>
+          <h1>Life happens.<br /><em>Let’s read into it.</em></h1>
+          <p className='intro-description'>
+            A collection of stories and fresh perspectives.<br />
+            Slow down, settle in, and find something that stays with you.
+          </p>
+          <span className='intro-flourish' aria-hidden='true'>✳</span>
+        </section>
+      )}
       {!query && <>
         {featured.loading && <p className='home-status' role='status'>Loading featured post…</p>}
         {featured.error && <p className='home-status' role='alert'>{featured.error} <button onClick={retry}>Retry</button></p>}
@@ -83,7 +94,7 @@ function HomePosts({ query }) {
         {result.loading && <p className='home-status' role='status'>Loading posts…</p>}
         {result.error && <p className='home-status' role='alert'>{result.error} <button onClick={retry}>Retry</button></p>}
         {!result.loading && !result.error && <>
-          <List objects={result.posts} title={query ? `Search results for “${query}”` : 'Explore More'} />
+          <List objects={result.posts} title={query ? `Search results for “${query}”` : 'The reading room'} />
           {result.posts.length === 0 && <p className='home-status'>No posts found.</p>}
         </>}
         {!query && <nav className='pagination' aria-label='Post pages'>
