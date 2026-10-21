@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { markServiceUnavailable } from './serviceStatus'
 
 const baseURL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '')
 
@@ -6,6 +7,14 @@ const api = axios.create({
   // BASE_URL may include the controller's /v1 prefix or just the server origin.
   baseURL: baseURL.endsWith('/v1') ? baseURL : `${baseURL}/v1`,
 })
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 503) markServiceUnavailable()
+    return Promise.reject(error)
+  },
+)
 
 export async function getBooks(page = 0, options = {}) {
   const { data } = await api.get('/posts', { ...options, params: { page } })
