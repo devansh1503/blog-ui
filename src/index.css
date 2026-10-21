@@ -1,0 +1,51 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'customFont';
+  src: url(./assets/MoulyD.ttf);
+}
+:root{
+  color-scheme: light;
+  --background: #fff;
+  --surface: #f7f7f7;
+  --text: #242424;
+  --muted: #666;
+  --border: #ccc;
+  --hover: #eee;
+  --link: #3459b5;
+}
+:root[data-theme='dark']{
+  color-scheme: dark;
+  --background: #121212;
+  --surface: #202020;
+  --text: #ededed;
+  --muted: #b5b5b5;
+  --border: #494949;
+  --hover: #303030;
+  --link: #9bb8ff;
+}
+body{
+  background-color: var(--background);
+  color: var(--text);
+  min-width: 320px;
+}
+button{
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+input::placeholder{
+  color: var(--muted);
+}
+.reader-content a{
+  color: var(--link);
+}
+:focus-visible{
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+}
